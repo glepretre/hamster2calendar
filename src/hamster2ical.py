@@ -45,12 +45,12 @@ if __name__ == "__main__":
 		if (not fact.description is None) and (len(fact.description) > 0):
 			description += fact.description.replace("\n", "\\n")
 		event.add("description", description)
-		dtstart = datetime(fact.start_time.year, fact.start_time.month, 
+		dtstart = datetime(fact.start_time.year, fact.start_time.month,
 			fact.start_time.day, fact.start_time.hour, fact.start_time.minute,
 			tzinfo=pytz.timezone("Europe/Paris"))
 		event.add('dtstart', dtstart)
 		if not fact.end_time is None:
-			dtend = datetime(fact.end_time.year, fact.end_time.month, 
+			dtend = datetime(fact.end_time.year, fact.end_time.month,
 				fact.end_time.day, fact.end_time.hour, fact.end_time.minute,
 				tzinfo=pytz.timezone("Europe/Paris"))
 			event.add('dtend', dtend)
