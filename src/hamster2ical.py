@@ -48,6 +48,6 @@ if __name__ == "__main__":
 			print "Error: unclosed activity started on %s" % fact.start_time
 		cal.add_component(event)
 	# Export
-	f = open(filepath, 'wb')
+	f = open("output.ical", 'wb')
 	f.write(cal.to_ical())
 	f.close()
