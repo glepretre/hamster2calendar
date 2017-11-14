@@ -27,24 +27,14 @@ if __name__ == "__main__":
 		end = datetime.today()
 	# Prepare calendar
 	cal = Calendar()
-	cal.add('prodid', '-//Hamster backup//')
-	cal.add('version', '2.0')
+	cal.add('version', '1.0')
 	# Extract facts as calendar events
 	storage = hamster.client.Storage()
 	for fact in storage.get_facts(start, end_date=end):
 		event = Event()
-		event["uid"] = "%s@%s" % (fact.id, socket.gethostname())
-		event.add("x-hamster-activityid", u"%s"%fact.activity_id)
-		event.add("x-hamster-category", u"%s"%fact.category)
-		event.add("x-hamster-tags", json.dumps([u"%s"%tag for tag in fact.tags]))
-		event.add("partstat", "accepted")
-		event.add("role", "chair")
-		event.add("summary", fact.activity)
-		description  = u"%s@%s\\n" % (fact.activity, fact.category)
-		description += u" ".join(fact.tags) + "\\n"
-		if (not fact.description is None) and (len(fact.description) > 0):
-			description += fact.description.replace("\n", "\\n")
-		event.add("description", description)
+		event.add("categories", u"%s"%fact.category)
+		event.add("summary", fact.activity + " - " + fact.category)
+		event.add("description", fact.description)
 		dtstart = datetime(fact.start_time.year, fact.start_time.month,
 			fact.start_time.day, fact.start_time.hour, fact.start_time.minute,
 			tzinfo=pytz.timezone("Europe/Paris"))
