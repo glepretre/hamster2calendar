@@ -61,4 +61,3 @@ if __name__ == "__main__":
 	f = open(filepath, 'wb')
 	f.write(cal.to_ical())
 	f.close()
-
